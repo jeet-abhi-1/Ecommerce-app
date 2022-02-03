@@ -1,32 +1,29 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <q-layout view="lHh Lpr lFf">
+    
+    <app-header/>
     <router-view/>
-  </div>
+  </q-layout>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
+import Header from './components/Header.vue'
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+export default {
+  name: 'LayoutDefault',
 
-    &.router-link-exact-active {
-      color: #42b983;
+  components: {
+    appHeader: Header
+  },
+
+  data () {
+    return {
+      leftDrawerOpen: false
     }
   }
 }
+</script>
+
+<style>
 </style>
