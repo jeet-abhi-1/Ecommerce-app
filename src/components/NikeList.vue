@@ -5,7 +5,7 @@
         <div>
         <div class="flex justify-between q-my-md q-px-lg text-body1 text-primary">
             <span>Deals of the day</span>
-            <router-link class="routerLink" to="/nike-products" exact><span class="cursor-pointer">See all</span></router-link>
+            <router-link class="routerLink" to="/nike-products" exact><span class="text-primary cursor-pointer">See all</span></router-link>
         </div>
         <div class="q-px-lg rounded">
             <!-- <p v-for="(data, index) in shoesInfo" :key="index">

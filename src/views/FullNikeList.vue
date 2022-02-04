@@ -3,18 +3,21 @@
         <div 
             v-for="(data, index) in shoesInfo" :key="index"
             class="q-pa-md flex row items-start q-gutter-md">
-            <q-card class="my-card flex-center">
-                <img :src="data.image" style="max-width: 200px; height:200px" >
-
-                <q-card-section class="flex flex-wrap">
-                    <div class="text-h6">Our Changing Planet</div>
-                    <!-- <div class="text-subtitle2">by John Doe</div> -->
-                </q-card-section>
-
-                <q-card-section class="q-pt-none">
-                    ${{ data.price }}
-                </q-card-section>
+            <router-link class="routerLink" v-bind:to="'/cart/' + data.id" exact>
+            <q-card class="my-card flex-center cursor-pointer rounded-borders">
+                <div class="wrap-class ">
+                    <img :src="data.image">
+                </div>
+                <div class="product-content text-primary">
+                    <q-card-section class="flex flex-wrap">
+                            <div class="text-h6">{{ data.category }}</div>
+                        </q-card-section>
+                    <q-card-section class="q-pt-none">
+                        ${{ data.price }}
+                    </q-card-section>
+                </div>
             </q-card>
+            </router-link>
         </div>
     </div>
 </template>
@@ -49,5 +52,30 @@ export default {
     margin: 1rem;
 }
 
+.routerLink{
+    text-decoration: none;
+}
+
+.wrap-class {
+    word-wrap: break-word;
+    max-width: 200px;
+    max-height: 273px;
+}
+
+.wrap-class img {
+    width: 200px;
+    height: 200px;
+}
+
+.text-h6 {
+    font-size: .85rem;
+    font-weight: 500;
+    line-height: 1rem;
+    letter-spacing: 0.0125em;
+}
+
+.product-content {
+    border: 2px solid black;
+}
     
 </style>
