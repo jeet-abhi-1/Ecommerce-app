@@ -30,7 +30,7 @@
             <q-separator />
 
                 <q-card-actions align="right">
-                    <q-btn to="/nike-products" color="white" text-color="primary" label="Back" />
+                    <q-btn to="/products" color="white" text-color="primary" label="Back" />
                     <q-btn @click="proceedPayment" color="primary" label="Add to Cart"/>
                 </q-card-actions>
             </q-card>
@@ -123,6 +123,9 @@
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
     data() {
         return {
@@ -148,9 +151,8 @@ export default {
         },    
 
     async created() {
-        const data = await this.$http.get(`https://fakestoreapi.com/products/${ this.id }`)
-        console.log(data)
-        this.product = data.body
+        const res = await axios.get(`https://fakestoreapi.com/products/${ this.id }`)
+        this.product = res.data
     },
 }
 </script>

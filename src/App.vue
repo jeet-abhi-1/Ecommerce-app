@@ -1,25 +1,28 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr fFf">
     
-    <app-header/>
+    <HeaderPage/>
     <router-view/>
+    <FooterPage/>
   </q-layout>
 </template>
 
 <script>
 
-import Header from './components/Header.vue'
+import Header from './layouts/Header.vue'
+import Footer from './layouts/Footer.vue'
 
 export default {
   name: 'LayoutDefault',
 
   components: {
-    appHeader: Header
+    HeaderPage: Header,
+    FooterPage: Footer
   },
 
   data () {
     return {
-      leftDrawerOpen: false
+      
     }
   }
 }
