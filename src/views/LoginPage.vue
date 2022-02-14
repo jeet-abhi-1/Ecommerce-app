@@ -49,8 +49,8 @@ export default {
 
 <style lang="scss">
 
-// .q-field__native {
-//     padding: 0 3rem;
-// }
+.q-field__native {
+    padding-right: 6rem;
+}
     
 </style>

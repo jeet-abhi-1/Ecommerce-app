@@ -4,7 +4,12 @@
 
         <div class="flex justify-between q-my-sm q-px-lg text-body1 text-primary">
             <span>Deals of the day</span>
-            <router-link to="/products" exact><span class="text-primary cursor-pointer">See all</span></router-link>
+            <router-link 
+                style="text-decoration: none;" 
+                to="/products" 
+                exact>
+                <span class="text-primary cursor-pointer">See all</span>
+            </router-link>
         </div>
         <div v-if="productInfo.length < 1">
             <div v-if="productInfo.length < 1" class="q-my-xl">
@@ -17,7 +22,7 @@
             </div>
         </div>
 
-        <div v-else class="items-center q-pa-lg q-ma-lg bg-info rounded-borders overflow-auto hide-scrollbar">
+        <div v-else class="items-center q-pa-lg q-mx-lg q-mb-lg bg-info rounded-borders overflow-auto hide-scrollbar">
             <div class="row q-mr-md no-wrap">
                 
                 <ProductItem

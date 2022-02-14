@@ -7,7 +7,7 @@
           
             <q-space />
 
-            <small><span class="q-mr-xs"> Log In here</span></small>
+            <small><span class="q-mr-xs"> LOGIN</span></small>
             <router-link to="/login"> 
                 <q-icon 
                   style="color: #fff;"

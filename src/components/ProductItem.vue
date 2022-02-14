@@ -11,12 +11,10 @@
                 </div>
 
                 <div class="product-content text-primary">
-                    <q-card-section class="flex flex-wrap cursor-pointer">
-                            <div class="text-h6">{{ product.category }}</div>
+                    <q-card-section class=" cursor-pointer">
+                            <div class="text-subtitle2">{{ product.category }}</div>
+                            <div class="text-subtitle2">${{ product.price }}</div>
                         </q-card-section>
-                    <q-card-section class="q-pt-none">
-                        ${{ product.price }}
-                    </q-card-section>
                 </div>
             </q-card>
             

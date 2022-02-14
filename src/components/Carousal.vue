@@ -1,27 +1,29 @@
 <template>
     <div class="q-px-lg rounded" >
        <q-carousel 
-            class="bg-accent custom-corousal-class rounded-borders text-black-5"
+            class="rounded-borders text-black-5"
             animated
             height="30vh"
             v-model="corousal"
+            transition-prev="scale"
+            transition-next="scale"
             infinite
-            autoplay
             navigation
+            autoplay
             padding
             control-color="dark"
             >
-                <q-carousel-slide name="nike" class="column no-wrap flex-center">
+                <q-carousel-slide name="nike" class="column no-wrap flex-center" img-src="img/background.jpg">
                     <div class="text-h2">
                         Nike
                     </div>
                 </q-carousel-slide>
-                <q-carousel-slide name="adidas" class="column no-wrap flex-center">
+                <q-carousel-slide name="adidas" class="column no-wrap flex-center" img-src="img/background.jpg">
                     <div class="text-h2">
                         Adidas
                     </div>
                 </q-carousel-slide>
-                <q-carousel-slide name="puma" class="column no-wrap flex-center">
+                <q-carousel-slide name="puma" class="column no-wrap flex-center" img-src="img/background.jpg">
                     <div class="text-h2">
                         Puma
                     </div>

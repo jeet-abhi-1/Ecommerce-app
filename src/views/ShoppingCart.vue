@@ -56,7 +56,7 @@
         </div>
 
         <div v-else-if="!proceedToPaymentPage">
-            <div class="row q-mx-xl">
+            <q-page-container class="row q-mx-xl">
                 <div class="q-pa-md items-start q-gutter-md col-xs-3">
                     <div class="wrap-class-cart">
                         <img :src="product.image">
@@ -71,10 +71,10 @@
                 
                 <q-separator color="primary" vertical inset />
 
-            <div class="q-mx-auto" style="max-width: 600px">
-                <q-form class="form-class col-xs-5">
+            <q-page padding class="q-mx-auto" style="width: 400px">
+                <q-form>
                     <div class="text-subtitle1">Add Delivery Address</div>
-                    <q-input class="q-mb-sm" outlined label="Address" />
+                    <q-input class=" q-mb-sm" outlined label="Address" />
                     <q-input class="q-mb-sm" outlined label="Landmark" />
                     <q-input class="q-mb-sm" outlined label="City" />
                     <q-input class="q-mb-sm" outlined label="State" />
@@ -84,9 +84,9 @@
                     <q-btn to="/" color="white" text-color="primary" label="Back" />
                     <q-btn color="primary" @click="proceedToPaymentPage = !proceedToPaymentPage" label="Next"/>
                 </q-card-actions>
-            </div>
+            </q-page>
                 
-            </div>
+            </q-page-container>
         </div>
 
         <div v-else>

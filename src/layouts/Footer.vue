@@ -1,12 +1,11 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-footer class="row q-px-sm" elevated>
-      <!-- <q-bar class="footer-text"> -->
-        <div>Privacy policy</div>
-          
-        <q-space />
-
-        <div>Contact support</div>
+    <q-footer elevated style="background: #0262b6">
+        <q-bar>
+          <span class="text-body2">Privacy Policy</span>
+          <q-space />
+          <span class="text-body2">Contact Support</span>
+        </q-bar>
     </q-footer>
   </q-layout>
 </template>
