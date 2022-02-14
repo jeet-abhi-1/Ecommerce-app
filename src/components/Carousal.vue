@@ -5,8 +5,6 @@
             animated
             height="30vh"
             v-model="corousal"
-            transition-prev="scale"
-            transition-next="scale"
             infinite
             navigation
             autoplay

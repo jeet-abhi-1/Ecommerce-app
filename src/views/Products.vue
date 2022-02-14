@@ -1,7 +1,7 @@
 <template>
-    <div>  
+    <div class="q-px-lg" >  
         <div v-if="productInfo.length < 1" class="q-my-xl row justify-center">
-            <p>Please wait</p>
+            <p class="text-h5">Please wait</p>
             <q-spinner-dots
             width="100vw"
             class="justify-center q-my-auto" 
@@ -9,7 +9,8 @@
             size="1rem"
         />
         </div>
-        <div v-else class="overflow-auto hide-scrollbar q-ma-xl" style="height: 100vh">
+        <div v-else class="overflow-auto hide-scrollbar q-ma-xl" style="height: 70vh">
+
             <div 
                 class="q-pa-xl q-mb-xl bg-accent row items-start q-col-gutter-xl q-col-gutter-y-md"
                 

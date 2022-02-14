@@ -10,11 +10,13 @@
                     />
                 </div>
 
-                <div class="product-content text-primary">
-                    <q-card-section class=" cursor-pointer">
-                            <div class="text-subtitle2">{{ product.category }}</div>
-                            <div class="text-subtitle2">${{ product.price }}</div>
-                        </q-card-section>
+                <div class="product-content text-center text-primary">
+                    <q-item-section class="cursor-pointer">
+                            <!-- <div class="text-subtitle2">{{ product.category }}</div>
+                            <div class="text-subtitle2">${{ product.price }}</div> -->
+                            <q-item-label class="text-subtitle2">{{ product.category }}</q-item-label> <br>
+                            <q-item-label caption>${{ product.price }}</q-item-label>
+                        </q-item-section>
                 </div>
             </q-card>
             
@@ -42,6 +44,8 @@ export default {
 
 .product-content {
     width: 11rem;
+    line-height: 6px;
+    padding: 0.4rem 1.3rem;
 }
     
 </style>
