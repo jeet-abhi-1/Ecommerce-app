@@ -1,5 +1,5 @@
 <template>
-    <div class="q-px-lg" >  
+    <div>  
         <div v-if="productInfo.length < 1" class="q-my-xl row justify-center">
             <p class="text-h5">Please wait</p>
             <q-spinner-dots
@@ -9,12 +9,56 @@
             size="1rem"
         />
         </div>
-        <div v-else class="overflow-auto hide-scrollbar q-ma-xl" style="height: 70vh">
+        <div v-else class="overflow-auto hide-scrollbar q-mx-xl rounded-border" style="height: 70vh; border-radius: 16px">
+            <div class="options q-pr-lg q-pt-sm">
 
-            <div 
-                class="q-pa-xl q-mb-xl bg-accent row items-start q-col-gutter-xl q-col-gutter-y-md"
+                <q-btn flat color="primary" label="Filter" class="q-mr-md sticky-btn">
+                    <q-menu
+                    :offset="[0, 20]"
+                    >
+                    <q-list style="min-width: 100px">
+                        <q-item>
+                        <q-item-section>Filter By</q-item-section>
+                        </q-item>
+                        <q-separator color="text-black"/>
+                        <q-item clickable v-close-popup>
+                        <q-item-section>Category</q-item-section>
+                        </q-item>
+                        <q-item clickable v-close-popup>
+                        <q-item-section>Size</q-item-section>
+                        </q-item>
+                        <q-item clickable v-close-popup>
+                        <q-item-section>Type</q-item-section>
+                        </q-item>
+                    </q-list>
+                    </q-menu>
+                </q-btn>
+
+                <q-btn flat color="primary" label="Sort By">
+                    <q-menu
+                    :offset="[0, 20]"
+                    >
+                    <q-list style="min-width: 100px">
+                        <q-item>
+                        <q-item-section>Sort By</q-item-section>
+                        </q-item>
+                        <q-separator color="text-black"/>
+                        <q-item clickable v-close-popup>
+                        <q-item-section>Time</q-item-section>
+                        </q-item>
+                        <q-item clickable v-close-popup>
+                        <q-item-section>Price</q-item-section>
+                        </q-item>
+                        <q-item clickable v-close-popup>
+                        <q-item-section>Discount</q-item-section>
+                        </q-item>
+                    </q-list>
+                    </q-menu>
+                </q-btn>
+
                 
-                >
+            </div>
+            <div class="q-pa-lg bg-accent row items-start  q-col-gutter-xl">
                 <ProductItem 
                     class="col-3"
                     v-for="(data, index) in productInfo" :key="index"
@@ -75,5 +119,11 @@ export default {
 .product-content {
     border: 2px solid black;
 }
+
+.options {
+    text-align: end;
+}
+
+
     
 </style>

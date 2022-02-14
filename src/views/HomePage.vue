@@ -66,4 +66,8 @@ export default {
     text-decoration: none;
 }
 
+.rounded-borders {
+    border-radius: 16px;
+}
+
 </style>

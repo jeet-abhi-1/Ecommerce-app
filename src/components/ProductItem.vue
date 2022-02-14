@@ -1,4 +1,5 @@
 <template>
+    <div class="product-items">
         <router-link class="routerLink" :to="'/cart/' + product.id" exact>
             <q-card class="my-card flex-center rounded-borders q-px-md q-mx-sm no-pointer-events"> 
                 <div class="justify-center q-gutter-md row items-start">
@@ -12,15 +13,13 @@
 
                 <div class="product-content text-center text-primary">
                     <q-item-section class="cursor-pointer">
-                            <!-- <div class="text-subtitle2">{{ product.category }}</div>
-                            <div class="text-subtitle2">${{ product.price }}</div> -->
                             <q-item-label class="text-subtitle2">{{ product.category }}</q-item-label> <br>
                             <q-item-label caption>${{ product.price }}</q-item-label>
                         </q-item-section>
                 </div>
-            </q-card>
-            
-        </router-link>        
+            </q-card>  
+        </router-link>     
+    </div>       
 </template>
 
 <script>
@@ -43,9 +42,15 @@ export default {
 }
 
 .product-content {
-    width: 11rem;
+    width: 11rem !important;
     line-height: 6px;
     padding: 0.4rem 1.3rem;
 }
     
+.product-items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
 </style>

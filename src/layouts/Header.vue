@@ -3,17 +3,19 @@
       <q-header elevated>
           <q-bar >
             <q-icon class="cursor-pointer" name="menu" />
-            <div >The Ninja Market</div>
-          
+            <router-link class="routerLink text-white q-ml-md" to="/">
+              <div>The Ninja Market</div>
+            </router-link>
             <q-space />
 
-            <small><span class="q-mr-xs"> LOGIN</span></small>
-            <router-link to="/login"> 
-                <q-icon 
+            <small><span class="q-mr-xs">LOGIN</span></small>
+                <router-link to="/login" class="routerLink">
+                  <q-icon 
+                  to="/login"
                   style="color: #fff;"
                   class="cursor-pointer" 
                   name="account_circle" />
-            </router-link>
+                </router-link>
           </q-bar>
       </q-header>
       <q-page-container>
