@@ -44,7 +44,7 @@
                     </q-card-section>
 
                     <q-card-section class="q-pt-none">
-                    Pleae select size to proceed.
+                    Please select size to proceed.
                     </q-card-section>
 
                     <q-card-actions align="right" class="bg-white text-teal">
@@ -111,6 +111,7 @@
                 <q-radio v-model="shape" val="card" label="Credit/Debit Card" />
                 <q-radio v-model="shape" val="phonepe" label="Phonepe" />
                 <q-radio v-model="shape" val="wallets" label="Other wallet" />
+                <q-radio v-model="shape" val="cash" label="Cash On Delivery" />
                 </div>
                 <q-card-actions align="right">
                     <q-btn to="/" color="white" text-color="primary" label="Back" />

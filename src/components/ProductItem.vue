@@ -5,7 +5,7 @@
                 <div class="justify-center q-gutter-md row items-start">
                     <q-img 
                         :src="product.image"
-                        style="max-width: 300px; height: 337px;" 
+                        style="max-width: 200px; height: 337px;" 
                         class="product-image"
                         :ratio=" 4/3"
                     />

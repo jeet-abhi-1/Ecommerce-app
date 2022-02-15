@@ -8,27 +8,27 @@ const routes = [
   {
     path: '/',
     name: 'HomePage',
-    component: () => import('../views/HomePage.vue')
+    component: () => import(/* webpackChunkName: 'HomePage'*/'../views/HomePage.vue')
   },
   {
     path: '/products',
     name: 'Products',
-    component: () => import('../views/Products.vue')
+    component: () => import(/* webpackChunkName: 'Products'*/'../views/Products.vue')
   },
   {
     path: '/cart/:id',
     name: 'ShoppingCart',
-    component: () => import('../views/ShoppingCart.vue')
+    component: () => import(/* webpackChunkName: 'ShoppingCart'*/'../views/ShoppingCart.vue')
   },
   {
     path: '/orderPlaced',
     name: 'OrderPlaced',
-    component: () => import('../views/OrderPlaced.vue')
+    component: () => import(/* webpackChunkName: 'OrderPlaced'*/'../views/OrderPlaced.vue')
   },
   {
-    path: '/login',
-    name: 'LoginPage',
-    component: () => import('../views/LoginPage.vue')
+    path: '/auth',
+    name: 'PageAuth',
+    component: () => import('../views/PageAuth') 
   }
   // {
   //   path: '/about',

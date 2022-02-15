@@ -58,7 +58,7 @@
 
                 
             </div>
-            <div class="q-pa-lg bg-accent row items-start  q-col-gutter-xl">
+            <div class="q-pl-xl q-py-lg bg-accent row items-start  q-col-gutter-xl">
                 <ProductItem 
                     class="col-3"
                     v-for="(data, index) in productInfo" :key="index"
