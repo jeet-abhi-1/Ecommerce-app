@@ -11,8 +11,8 @@
                 <span class="text-primary cursor-pointer">See all</span>
             </router-link>
         </div>
-        <div v-if="productInfo.length < 1">
-            <div v-if="productInfo.length < 1" class="q-my-xl">
+        <div v-if="products.length < 1">
+            <div v-if="products.length < 1" class="q-my-xl">
                 <q-spinner-hourglass
                 width="100vw"
                 class="justify-center q-my-auto" 
@@ -27,36 +27,41 @@
                 
                 <ProductItem
                     style="height: 160px"
-                    v-for="(data, index) in productInfo" :key="index"
+                    v-for="(data, index) in products" :key="index"
                     :product="data"
                  />
             </div>            
         </div>
     </div>
-   
-</template>
+</template> 
 
 <script>
 
 import Carousal from '../components/Carousal.vue'
 import ProductItem from '../components/ProductItem.vue'
-import axios from 'axios'
+import { mapActions, mapGetters } from 'vuex'
 export default {
     
     data() {
         return {
-            productInfo: []
+
         }
     },
     components: {
         Carousal,
         ProductItem
     },
-    async created() {
-            const res = await axios.get('https://fakestoreapi.com/products/')
-            console.log(res)
-            this.productInfo = res.data
-        }
+    methods: {
+         ...mapActions(['fetchProducts'])
+    },
+    computed: {
+        ...mapGetters({
+            products: 'allProducts'
+        })
+    },
+    created() {
+        this.fetchProducts()
+    }
 }
 </script>
 
@@ -71,3 +76,5 @@ export default {
 }
 
 </style>
+
+

@@ -5,10 +5,13 @@ import products from './modules/products'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state: {},
-    getters: {},
-    mutations: {},
-    modules: {
-        products
+  state: {
+    },
+  mutations: {
+    },
+  actions: {
+    },
+  modules: {
+    products
     }
 })

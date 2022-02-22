@@ -1,6 +1,6 @@
 <template>
     <div>  
-        <div v-if="productInfo.length < 1" class="q-my-xl row justify-center">
+        <div v-if="products.length < 1" class="q-my-xl row justify-center">
             <p class="text-h5">Please wait</p>
             <q-spinner-dots
             width="100vw"
@@ -61,7 +61,7 @@
             <div class="q-pl-xl q-py-lg bg-accent row items-start  q-col-gutter-xl">
                 <ProductItem 
                     class="col-3"
-                    v-for="(data, index) in productInfo" :key="index"
+                    v-for="(data, index) in products" :key="index"
                     :product="data"/>
             </div>
         </div>
@@ -70,23 +70,30 @@
 
 <script>
 
-import axios from 'axios'
+// import axios from 'axios'
 import ProductItem from '../components/ProductItem.vue';
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     data() {
         return {
-            productInfo: []
+            // productInfo: []
         }
     },
     components: {
         ProductItem
     },
-    async mounted() {
-            const res = await axios.get('https://fakestoreapi.com/products/')
-            console.log(res)
-            this.productInfo = res.data
-        }
+    methods: {
+         ...mapActions(['fetchProducts'])
+    },
+    computed: {
+        ...mapGetters({
+            products: 'allProducts'
+        })
+    },
+    created() {
+        this.fetchProducts()
+    }
 }
 </script>
 

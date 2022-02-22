@@ -8,14 +8,17 @@
             </router-link>
             <q-space />
 
-            <small><span class="q-mr-xs">LOGIN</span></small>
-                <router-link to="/auth" class="routerLink">
-                  <q-icon 
-                  to="/login"
-                  style="color: #fff;"
-                  class="cursor-pointer" 
-                  name="account_circle" />
-                </router-link>
+              <router-link v-if="!authenticatedUser" to="/login" class="routerLink">
+              <small><span class="q-mr-xs text-white">Login</span></small>
+                <q-icon 
+                style="color: #fff;"
+                class="cursor-pointer" 
+                name="account_circle" />
+              </router-link>
+
+              <div v-else class="text-subtitle1" @click.prevent="logOut">
+                  <q-icon class="cursor-pointer" name="logout" />
+              </div>
           </q-bar>
       </q-header>
       <q-page-container>
@@ -36,10 +39,10 @@
 <script>
 
 
-
 export default {
     data() {
       return {
+        loggedUser: '',
         navs: [
           {
             to: '/',
@@ -56,11 +59,25 @@ export default {
             name: 'puma',
             label: 'Puma'
           }
-        ]
+        ],
+        authenticatedUser: ''
+        
       }
     },
-    components: {
-        
+    
+    methods: {
+        authenticated() {
+            this.authenticatedUser = localStorage.getItem('jwt')
+        },
+
+        logOut() {
+          localStorage.clear();
+          this.authenticatedUser = ''
+          this.$router.push("/login");
+        },
+    },
+    created() {
+        this.authenticated()
     }
 }
 </script>

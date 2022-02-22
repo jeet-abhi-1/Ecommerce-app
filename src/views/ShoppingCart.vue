@@ -1,13 +1,16 @@
 <template>
     <div>
-        <div v-if="!addToCart" class="q-pa-md row items-start q-gutter-md">
-            <div>
-                <div class="wrap-class ">
-                    <img :src="product.image">
+        <div v-if="!addToCart" class="q-pa-md row items-start q-gutter-sm flex-center">
+            <div class="cart-image" style="width: 300px; height: 345px">
+                
+                <div class="wrap-class">
+                    <img 
+                        :src="product.image"/>
                 </div>
             </div>
 
-            <q-card class="col-xs-5 q-mx-xl info-box"> 
+
+            <q-card class="col-xs-5 "> 
                 <q-card-section class="bg-primary text-white">
                     <div class="text-h6">{{ product.title }}</div>
                     <div class="text-subtitle1">$ {{ product.price }}</div>
@@ -27,7 +30,7 @@
                     <p>{{ product.description}}</p>
                 </div>
             
-            <q-separator />
+            <q-separator color="primary" />
 
                 <q-card-actions align="right">
                     <q-btn to="/products" color="white" text-color="primary" label="Back" />
@@ -55,8 +58,8 @@
 
         </div>
 
-        <div v-else-if="!proceedToPaymentPage">
-            <q-page-container class="row q-mx-xl">
+        <div v-else-if="!proceedToPaymentPage" style="height= 50vh;"> 
+            <q-page-container class="row q-mx-xl" >
                 <div class="q-pa-md items-start q-gutter-md col-xs-3">
                     <div class="wrap-class-cart">
                         <img :src="product.image">
@@ -103,7 +106,7 @@
                     </q-card-section>
                 </div> 
                 
-                <q-separator color="primary" vertical inset />
+                <q-separator color="primary q-my-lg" vertical  />
             
             <div class="q-pa-md q-mx-auto">
                 <div class="q-gutter-sm column">
@@ -126,6 +129,7 @@
 <script>
 
 import axios from 'axios'
+// import { mapActions, mapGetters } from 'vuex'
 
 export default {
     data() {
@@ -142,6 +146,8 @@ export default {
     },
     
     methods: {
+            // ...mapActions(['getSingleProduct']),
+
             proceedPayment() {
                 if(this.size.length === 0) {
                     this.alert = true
@@ -152,29 +158,47 @@ export default {
         },    
 
     async created() {
-        const res = await axios.get(`https://fakestoreapi.com/products/${ this.id }`)
+        const res = await axios.get(`http://localhost:3000/admin/products/cart/${ this.id }`)
         this.product = res.data
     },
+    
+    computed: {
+        // ...mapGetters({
+        //     product: 'singleProduct'
+        // })
+    },
+    // created() {
+    //     this.$store.dispatch('getSingleProduct', this.id)
+
+    //     this.getSingleProduct()
+    // },
+    
+    
 }
 </script>
 
 <style lang="scss" scoped>
 
-.wrap-class {
-    word-wrap: break-word;
-    max-width: 200px;
-    max-height: 273px;
+.cart-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e3e3e3;
     
 }
 
+.wrap-class-cart {
+    text-align: center;
+}
 .wrap-class-cart img {
     max-width: 180px;
-    max-height: 230px;
+    max-height: 180px;
+    text-align: center;
 }
 
 .wrap-class img {
-    width: 400px;
-    height: 350px;
+    width: 200px;
+    height: 200px;
 }
 
 .info-box {
