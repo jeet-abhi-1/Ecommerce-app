@@ -4,6 +4,8 @@
     <HeaderPage/>
     <router-view/>
     <FooterPage/>
+
+    
   </q-layout>
 </template>
 
@@ -22,7 +24,7 @@ export default {
 
   data () {
     return {
-      
+        
     }
   }
 }

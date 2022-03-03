@@ -158,7 +158,7 @@ export default {
         },    
 
     async created() {
-        const res = await axios.get(`http://localhost:3000/admin/products/cart/${ this.id }`)
+        const res = await axios.get(`http://localhost:3000/product/products/cart/${ this.id }`)
         this.product = res.data
     },
     

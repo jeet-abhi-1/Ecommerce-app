@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { url } = require("vuelidate/lib/validators");
 
 const productSchema = mongoose.Schema({
   title: {
@@ -14,7 +15,7 @@ const productSchema = mongoose.Schema({
     default: 'https://picsum.photos/200'
   },
   price: {
-    type: String,
+    type: Number,
     required: true
   }
 });

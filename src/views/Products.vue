@@ -70,14 +70,13 @@
 
 <script>
 
-// import axios from 'axios'
 import ProductItem from '../components/ProductItem.vue';
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
     data() {
         return {
-            // productInfo: []
+            
         }
     },
     components: {

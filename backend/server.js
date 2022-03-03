@@ -13,7 +13,10 @@ mongoose.connection
 // database connection ends here
 
 //registering cors
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:8080',
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 //configure body parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,8 +31,14 @@ app.get('/', (req, res) => {
 const userRoutes = require("./route/user"); 
 app.use("/user", userRoutes);
 
-const adminRoutes = require('./route/admin')
-app.use("/admin", adminRoutes)
+const cartRoutes = require("./route/cart"); 
+app.use("/cart", cartRoutes);
+
+const productRoutes = require('./route/product')
+app.use("/product", productRoutes)
+
+const orderRoutes = require('./route/order')
+app.use("/order", orderRoutes)
 
 
 const PORT = process.env.PORT || 3000

@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     name: 'HomePage',
     component: () => import(/* webpackChunkName: 'HomePage'*/'../views/HomePage.vue'),
-    
+
 
   },
   {
@@ -25,6 +25,30 @@ const routes = [
     }
   },
   {
+    path: '/cart',
+    name: 'Cart',
+    component: () => import(/* webpackChunkName: 'CartView'*/'../views/CartView.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/select-payment',
+    name: 'PaymentSelection',
+    component: () => import(/* webpackChunkName: 'PaymentSelection'*/'../views/PaymentSelection.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/place-order',
+    name: 'Order',
+    component: () => import(/* webpackChunkName: 'ShoppingCart'*/'../views/Order.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/orderPlaced',
     name: 'OrderPlaced',
     component: () => import(/* webpackChunkName: 'OrderPlaced'*/'../views/OrderPlaced.vue'),
@@ -35,27 +59,27 @@ const routes = [
   {
     path: '/register',
     name: 'Register',
-    component: () => import('../views/Register') ,
-    meta : {
-      requiresVisitor : true
+    component: () => import('../views/Register'),
+    meta: {
+      requiresVisitor: true
     }
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login') ,
-    meta : {
-      requiresVisitor : true
+    component: () => import('../views/Login'),
+    meta: {
+      requiresVisitor: true
     }
   },
   {
     path: '/add-product',
     name: 'AddProduct',
-    component: () => import('../views/admin/AddProduct') ,
+    component: () => import('../views/admin/AddProduct'),
     meta: {
       requiresAuthAdmin: true
     }
-  },
+  }
 ]
 
 const router = new VueRouter({
@@ -68,27 +92,27 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
+    // console.log(localStorage.getItem("jwt"));
+    if (!localStorage.getItem("jwt")) {
+      next({
+        path: "/login",
 
-          if (!localStorage.getItem("jwt")) {
-            next({
-              path: "/login",
-              
-            });
-          }
-        // } else if (to.matched.some(record => record.meta.requiresVisitor)) {
-        //   if (localStorage.getItem('jwt')) {
-        //     next({
-        //       path: '/',
-        //     })
-        //   } else {
-        //     next()
-        //   }
-        // } 
-      else {
-        next()
-      }
-  }
+      });
+    }
+    // } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+    //   if (localStorage.getItem('jwt')) {
+    //     next({
+    //       path: '/',
+    //     })
+    //   } else {
+    //     next()
+    //   }
+    // } 
+    else {
       next()
+    }
+  }
+  next()
 });
 
 export default router

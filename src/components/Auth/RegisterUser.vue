@@ -1,102 +1,140 @@
 <template>
-    <form @submit.prevent="registerUser">
-        <div>
-            <p v-if="error" class="text-red">Register Failed : {{ error.message }}</p>
-        </div>
-        <div class="row q-mb-md">
-            <q-banner class="bg-grey-3 col">
-            <template v-slot:avatar>
-                <q-icon name="account_circle" color="primary" />
-            </template>
-                Register Your Account!
-            </q-banner>
-        </div>
-        <div class="row q-mb-md">
-            <q-input 
-            class="col"
-            outlined 
-            v-model="register.name" 
-            :rules="[ val => !!val || 'Please enter your name']"
-            lazy-rules
-            label="Name" 
-            ref="name"
-            stack-label />
-        </div>
-        <div class="row q-mb-md">
-            <q-input 
-            class="col"
-            outlined 
-            v-model="register.email" 
-            :rules="[ val => isValidEmailAddress(val) || 'Please enter valid email address']"
-            lazy-rules
-            label="Email" 
-            ref="email"
-            stack-label />
-        </div>
-        <div class="row q-mb-md">
-            <q-input 
-            class="col"
-            type="password"
-            outlined 
-            v-model="register.password" 
-            :rules="[ val => val.length >= 8 || 'Please use minimum 8 characters']"
-            
-            label="Password" 
-            ref="password"
-            stack-label />
-        </div>
-        <div class="row">
-            <q-space/>
-            <q-btn 
-                type="submit"
-                color="primary" 
-                label="Register" />
-        </div>
+  <form @submit.prevent="registerUser">
+    <div>
+      <p v-if="error" class="text-red">Register Failed : {{ error.message }}</p>
+    </div>
+    <div class="row q-mb-md">
+      <q-banner class="bg-grey-3 col">
+        <template v-slot:avatar>
+          <q-icon name="account_circle" color="primary" />
+        </template>
+        Register Your Account!
+      </q-banner>
+    </div>
 
-        <div>
-            <span class="text-subtitle2">Already have account?</span> 
-            <q-btn flat to="/login" color="primary" label="Login" class="" />
-        </div>
-        
-    </form>
+    <span
+      class="text-red text-caption text-weight-medium"
+      v-if="!$v.name.required && $v.name.$dirty"
+      >Name is required.</span
+    >
+    <span
+      class="text-red text-caption text-weight-medium"
+      v-if="!$v.name.alpha && $v.name.$dirty"
+      >Aplhabet characters only.</span
+    >
+    <div class="row q-mb-md">
+      <q-input
+        class="col"
+        outlined
+        v-model.trim="name"
+        label="Name"
+        stack-label
+      />
+    </div>
+
+    <span
+      class="text-red text-caption text-weight-medium"
+      v-if="(!$v.email.required || !$v.email.email) && $v.email.$dirty"
+      >Valid email required.</span
+    >
+    <div class="row q-mb-md">
+      <q-input class="col" outlined v-model="email" label="Email" stack-label />
+    </div>
+
+    <span
+      class="text-red text-caption text-weight-medium"
+      v-if="!$v.password.required && $v.password.$dirty"
+      >Password is required.</span
+    >
+    <span
+      class="text-red text-caption text-weight-medium"
+      v-if="!$v.password.minLength || !$v.password.minLength"
+      >Password must be between {{ $v.password.$params.minLength.min }} and
+      {{ $v.password.$params.maxLength.max }}</span
+    >
+    <div class="row q-mb-md">
+      <q-input
+        class="col"
+        type="password"
+        outlined
+        v-model="password"
+        label="Password"
+        stack-label
+      />
+    </div>
+
+    <div class="row">
+      <q-space />
+      <q-btn type="submit" color="primary" label="Register" />
+    </div>
+
+    <div>
+      <span class="text-subtitle2">Already have account?</span>
+      <q-btn flat to="/login" color="primary" label="Login" />
+    </div>
+  </form>
 </template>
 
 <script>
-
-import axios from 'axios'
+import axios from "axios";
+import {
+  required,
+  minLength,
+  maxLength,
+  email,
+  alpha,
+} from "vuelidate/lib/validators";
 
 export default {
-    
-    data() {
-        return {
-            register: {
-                name: '',
-                email: '',
-                password: '',
-                role: 'customer'
-            },
-            error: '',
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+      role: "customer",
+      error: "",
+    };
+  },
+  validations: {
+    name: {
+      required,
+      minLength: minLength(4),
+      alpha,
+    },
+    email: {
+      required,
+      email,
+    },
+    password: {
+      required,
+      minLength: minLength(6),
+      maxLength: maxLength(12),
+    },
+  },
+  methods: {
+    async registerUser() {
+      this.$v.$touch();
+
+      if (!this.$v.$invalid) {
+        let userData = {
+          name: this.name,
+          email: this.email.toLowerCase(),
+          password: this.password,
+        };
+
+        try {
+          const response = await axios.post(
+            "http://localhost:3000/user/register",
+            userData
+          );
+          console.log(response);
+          this.$router.push("/login");
+        } catch (error) {
+          this.error = error;
+          console.log(error);
         }
+      }
     },
-    methods: {
-
-        isValidEmailAddress(email) {
-            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            return re.test(String(email).toLowerCase())    
-        },
-
-        async registerUser() {
-            if(!this.$refs.name.hasError && !this.$refs.email.hasError && !this.$refs.password.hasError) {    
-                    try {
-                        const response = await axios.post('http://localhost:3000/user/register', this.register)
-                        console.log(response)
-                        this.$router.push('/login')
-                    } catch (error) {
-                        this.error = error
-                        console.log(error)
-                    }
-            }
-        },
-    },
-}
+  },
+};
 </script>

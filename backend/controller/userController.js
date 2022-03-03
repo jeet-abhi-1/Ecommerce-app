@@ -12,7 +12,6 @@ exports.registerNewUser = async (req, res) => {
       return res.status(409).json({
         message: "email already in use"
       });
-      
     }
     
     const user = new User({
@@ -32,17 +31,16 @@ exports.registerNewUser = async (req, res) => {
 exports.loginUser = async(req,res)=>{
     try {
       let findUser = await User.find({ email: req.body.email });
-        if (findUser.length < 1) {
-          res.json({ message: "Auth is failed" });
+        if (!findUser) {
+          res.send({ message: "User not found." });
         }
         else {
           await bcrypt.compare(req.body.password, findUser[0].password,(err, result) => {
             if (err) {
-              res.json({ message: "Auth is failed" });
+              res.status(400).json({ message: "Username/Password wrong." });
             }  
             if (result) {
-              const token = jwt.sign({ _id: findUser[0]._id, name: findUser[0].name, email: findUser[0].email},
-                            "secret", { expiresIn: 60*60});
+              const token = jwt.sign({ _id: findUser[0]._id, name: findUser[0].name, email: findUser[0].email},"secret");
                             res.json({
                               message: "Auth successfull",
                               token: token,
@@ -54,8 +52,13 @@ exports.loginUser = async(req,res)=>{
             })
         }
     } catch (err) {
-        res.json({error: err});
+        res.status(400).json({ err: err });
+
     }
   }
 
-
+// user details
+  exports.getUserDetails = async (req, res) => {
+    console.log(req.userData)
+    await res.json(req.userData);
+  };

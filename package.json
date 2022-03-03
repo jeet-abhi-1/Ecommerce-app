@@ -17,8 +17,10 @@
     "vue": "^2.6.11",
     "vue-cli-plugin-quasar": "^3.0.2",
     "vue-jwt-decode": "^0.1.0",
+    "vue-notifyjs": "^0.4.3",
     "vue-resource": "^1.5.3",
     "vue-router": "^3.2.0",
+    "vuelidate": "^0.7.7",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
