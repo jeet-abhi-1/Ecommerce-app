@@ -57,9 +57,17 @@ const routes = [
     }
   },
   {
+    path: '/orders',
+    name: 'Orders',
+    component: () => import(/* webpackChunkName: 'OrderPlaced'*/'../views/ShowOrders.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/register',
     name: 'Register',
-    component: () => import('../views/Register'),
+    component: () => import('../views/Authentication/Register'),
     meta: {
       requiresVisitor: true
     }
@@ -67,7 +75,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login'),
+    component: () => import('../views/Authentication/Login'),
     meta: {
       requiresVisitor: true
     }
@@ -96,20 +104,16 @@ router.beforeEach((to, from, next) => {
     if (!localStorage.getItem("jwt")) {
       next({
         path: "/login",
-
       });
     }
-    // } else if (to.matched.some(record => record.meta.requiresVisitor)) {
-    //   if (localStorage.getItem('jwt')) {
-    //     next({
-    //       path: '/',
-    //     })
-    //   } else {
-    //     next()
-    //   }
-    // } 
+    } else if (to.matched.some(record => record.meta.requiresAuthAdmin)) {
+      if (localStorage.getItem('jwt')) {
+        next()
+      } 
     else {
-      next()
+      next({
+        path: "/"
+      })
     }
   }
   next()

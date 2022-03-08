@@ -17,10 +17,11 @@
 
                 <span
                   class="text-red text-caption text-weight-medium"
-                  v-if="!$v.address.required || !$v.address.$dirty"
+                  v-if="!$v.address.required && $v.address.$dirty"
                   >Address is required.</span
                 >
-                <div class="row q-mb-sm">
+
+                <div class="row q-mb-md">
                   <q-input
                     class="col"
                     outlined
@@ -29,6 +30,9 @@
                     stack-label
                   />
                 </div>
+                
+                
+                
 
                 <!-- <div class="row q-mb-sm">
                   <q-input
@@ -42,12 +46,11 @@
 
                 <span
                   class="text-red text-caption text-weight-medium"
-                  v-if="
-                    (!$v.city.required || !$v.city.$dirty)
-                  "
+                  v-if="!$v.city.required && $v.city.$dirty"
                   >City is required.</span
                 >
-                <div class="row q-mb-sm">
+
+                <div class="row q-mb-md">
                   <q-input
                     class="col"
                     outlined
@@ -57,26 +60,33 @@
                   />
                 </div>
 
-                <!-- <div class="row q-mb-sm">
-                  <q-input
-                    class="col"
-                    outlined
-                    v-model="state"
-                    label="State"
-                    stack-label
-                  />
-                </div> -->
+                <span
+                  class="text-red text-caption text-weight-medium"
+                  v-if="!$v.pincode.required && $v.pincode.$dirty"
+                  >Pincode is required.</span
+                >
+                <span
+                  class="text-red text-caption text-weight-medium"
+                  v-if="!$v.pincode.numeric && $v.pincode.$dirty"
+                  >Pincode must be a number.</span
+                >
 
-                <!-- <div class="row q-mb-sm">
+                <span
+                  class="text-red text-caption text-weight-medium"
+                  v-if="!$v.pincode.minLength || !$v.pincode.maxLength"
+                  >Pincode must be
+                  {{ $v.pincode.$params.minLength.min }} digit</span
+                >
+
+                <div class="row q-mb-md">
                   <q-input
                     class="col"
-                    type="Number"
                     outlined
-                    v-model="pincode"
+                    v-model.trim="pincode"
                     label="Pincode"
                     stack-label
                   />
-                </div> -->
+                </div>
 
                 <div class="row">
                   <q-space />
@@ -99,8 +109,14 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import { required, alpha } from "vuelidate/lib/validators";
+import { mapActions } from "vuex";
+import {
+  required,
+  alpha,
+  numeric,
+  minLength,
+  maxLength,
+} from "vuelidate/lib/validators";
 
 export default {
   props: ["cartItems", "totalPrice"],
@@ -110,8 +126,7 @@ export default {
       address: "",
       // landmark: "",
       city: "",
-      // state: "",
-      // pincode: "",
+      pincode: "",
     };
   },
   validations: {
@@ -120,27 +135,32 @@ export default {
     },
     city: {
       required,
-      alpha
+      alpha,
+    },
+    pincode: {
+      required,
+      numeric,
+      minLength: minLength(6),
+      maxLength: maxLength(12),
     },
   },
   methods: {
-    ...mapActions(['placeOrder']),
+    ...mapActions(["placeOrder"]),
+
     submitAddress() {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         let address = {
           address: this.address,
           city: this.city,
-        }
+        };
 
-        this.placeOrder(address)
-        
-
+        this.placeOrder(address);
       } else {
-        console.log('error');
+        console.log("error");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

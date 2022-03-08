@@ -14,7 +14,7 @@
 
 <script>
 
-import RegisterUser from '../components/Auth/RegisterUser.vue'
+import RegisterUser from '../../components/Auth/RegisterUser.vue'
 
 export default {
     data () {

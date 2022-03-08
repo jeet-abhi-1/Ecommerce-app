@@ -101,7 +101,11 @@ import axios from 'axios'
             async addProduct() {
                 if(!this.$refs.title.hasError && !this.$refs.description.hasError && !this.$refs.category.hasError && !this.$refs.image.hasError&& !this.$refs.price.hasError) {
                     try {
-                        const response = await axios.post('http://localhost:3000/product/add-product', this.product)
+                        const response = await axios.post('http://localhost:3000/product/add-product', this.product, {
+                            headers: {
+                                'Authorization' : "Bearer " + localStorage.getItem('jwt')
+                            }
+                        })
                         console.log(response)
                         this.$router.push('/products')
                     } catch (error) {

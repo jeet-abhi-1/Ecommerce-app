@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { url } = require("vuelidate/lib/validators");
 
 const productSchema = mongoose.Schema({
   title: {

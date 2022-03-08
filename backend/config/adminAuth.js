@@ -5,9 +5,12 @@ module.exports = async (req, res, next) => {
   try {
     const token = req.headers.authorization.replace("Bearer ", "");
     // console.log("Token:" +token);
-    const decoded = jwt.verify(token, "secret");
-      req.userData = decoded  
-      next()
+    const user = jwt.verify(token, "secret");
+      req.userData = user  
+
+        if(user.role == 'admin') {
+            next()
+        }
   } catch (err) {
     return res.status(401).json({
       message: "Authentification Failed"

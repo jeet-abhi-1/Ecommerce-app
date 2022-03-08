@@ -14,7 +14,7 @@
 
 <script>
 
-import LoginUser from '../components/Auth/LoginUser.vue'
+import LoginUser from '../../components/Auth/LoginUser.vue'
 
 export default {
     data () {

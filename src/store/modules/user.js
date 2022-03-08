@@ -21,18 +21,25 @@ const actions = {
         let response = await axios.post(`${api}login`, user);
 
         try {
-            let token = response.data.token;
-            console.log(token)
-            localStorage.setItem("jwt", token);
-            if (token) {
-                commit('auth_success', token);
-                router.push('/')
-            } else {
-                swal({
-                    text: `Authentication failed`,
-                    icon: 'error'
-                })
+            if (response) {
+                let token = response.data.token;
+                console.log(token)
+                localStorage.setItem("jwt", token);
+                if (token) {
+                    commit('auth_success', token);
+                    swal({
+                        text: 'Logged In Successfully!',
+                        icon: 'success'
+                    })
+                    router.push('/')
+                } else {
+                    swal({
+                        text: `Authentication failed`,
+                        icon: 'error'
+                    })
+                }
             }
+
         } catch (err) {
             // commit('auth_error', err);
             console.log('Error: ', err.response);

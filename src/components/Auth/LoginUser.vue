@@ -67,7 +67,7 @@ export default {
 
   methods: {
     ...mapActions(["userLogin", "getDetails"]),
-     async loginUser() {
+    async loginUser() {
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
@@ -78,9 +78,9 @@ export default {
 
         try {
           await this.userLogin(user);
-          this.getDetails()
+          this.getDetails();
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       }
     },

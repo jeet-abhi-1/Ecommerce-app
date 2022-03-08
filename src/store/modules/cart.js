@@ -3,12 +3,13 @@ import swal from 'sweetalert'
 
 const state = {
     cartItems: [],
-    totalPrice: ''
+    totalPrice: '',
 }
 
 const getters = {
     allItems: (state) => state.cartItems,
-    priceTotal: (state) => state.totalPrice
+    priceTotal: (state) => state.totalPrice,
+
 }
 
 const actions = {
@@ -18,17 +19,21 @@ const actions = {
 
         try {
             const rawResponse = await fetch(`http://localhost:3000/product/addToCart/${id}`, {
-            method: 'POST',
-            headers: {
-                'Authorization': "Bearer " + token
-            },
-           
-        });
-        const response = await rawResponse.json();
-        console.log("Response : ",response);
-        commit('addItemToCart', response)
+                method: 'POST',
+                headers: {
+                    'Authorization': "Bearer " + token
+                },
+
+            });
+            const response = await rawResponse.json();
+            console.log("Response : ", response);
+            commit('addItemToCart', response)
+            swal({
+                title: "Added to Cart!",
+                icon: "success",
+            });
         } catch (error) {
-            console.log('Error' , error.message)
+            console.log('Error', error.message)
         }
     },
 
@@ -36,16 +41,17 @@ const actions = {
 
         try {
             let token = localStorage.getItem('jwt')
-    
+
             const rawResponse = await fetch(`http://localhost:3000/cart/items`, {
                 method: 'GET',
                 headers: {
                     'Authorization': "Bearer " + token
                 },
             });
-    
+
             const isJson = rawResponse.headers.get('content-type')?.includes('application/json');
             const response = isJson ? await rawResponse.json() : null
+
             commit('setCartItems', response)
             commit('setTotalPrice', response)
         } catch (error) {
@@ -57,20 +63,20 @@ const actions = {
         let token = localStorage.getItem('jwt')
         try {
             const rawResponse = await fetch(`http://localhost:3000/cart/delete-item/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': "Bearer " + token
-            },
-        });
+                method: 'DELETE',
+                headers: {
+                    'Authorization': "Bearer " + token
+                },
+            });
             const response = await rawResponse.json();
             commit('setCartItems', response)
             commit('setTotalPrice', response)
             swal({
-                title: "Item Removed!",
+                title: "Item removed successfully!",
                 icon: "success",
-              });
+            });
         } catch (error) {
-            console.log("Error : " , error.message)
+            console.log("Error : ", error.message)
         }
     },
 }
@@ -81,6 +87,7 @@ const mutations = {
     setCartItems: (state, response) => (state.cartItems = response.items),
 
     setTotalPrice: (state, response) => (state.totalPrice = response.totalPrice),
+
 
 }
 

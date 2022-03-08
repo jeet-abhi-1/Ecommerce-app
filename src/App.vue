@@ -1,11 +1,24 @@
 <template>
   <q-layout view="hHh Lpr fFf">
     
-    <HeaderPage/>
+    <HeaderPage :drawerLeft="drawerLeft"/>
     <router-view/>
     <FooterPage/>
 
-    
+     <q-drawer
+        v-model="drawerLeft"
+        :width="200"
+        :breakpoint="500"
+        bordered
+        class="bg-grey-3"
+      >
+        <div class="fit q-mt-xl">
+         
+
+            hello
+
+        </div>
+      </q-drawer>
   </q-layout>
 </template>
 
@@ -24,7 +37,7 @@ export default {
 
   data () {
     return {
-        
+        drawerLeft: false
     }
   }
 }

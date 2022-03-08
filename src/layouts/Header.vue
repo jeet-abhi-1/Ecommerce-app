@@ -2,10 +2,7 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-bar>
-        <q-icon
-          class="cursor-pointer"
-          name="menu"
-        />
+        <q-icon class="cursor-pointer" name="menu" @click="drawer = !drawer" />
         <router-link class="routerLink text-white q-ml-md" to="/">
           <div>The Ninja Market</div>
         </router-link>
@@ -14,7 +11,6 @@
         <q-btn
           v-show="isLoggedIn"
           to="/cart"
-          class="q-mr-sm"
           size="md"
           flat
           icon="shopping_cart"
@@ -52,8 +48,32 @@
         />
       </q-tabs>
     </q-page-container>
+
+    <q-drawer
+      v-model="drawer"
+      :width="200"
+      :breakpoint="500"
+      overlay
+      bordered
+      content-class="bg-light-blue-9 text-white"
+    >
+      <q-scroll-area class="fit">
+        <q-list>
+          <template>
+            <q-item to="/orders" style="color: #fff" clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="local_mall" />
+              </q-item-section>
+              <q-item-section class="text-subtitle1">
+                Your Orders
+              </q-item-section>
+            </q-item>
+            <q-separator />
+          </template>
+        </q-list>
+      </q-scroll-area>
+    </q-drawer>
   </q-layout>
-  
 </template>
 
 <script>
@@ -62,6 +82,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
+      drawer: false,
       navs: [
         {
           to: "/",
@@ -78,23 +99,22 @@ export default {
           name: "puma",
           label: "Puma",
         },
-      ],      
+      ],
     };
   },
 
   methods: {
-    
     ...mapActions(["logOutUser"]),
 
     logOut() {
-      this.logOutUser()
-      this.$router.push('/login')
+      this.logOutUser();
+      this.$router.push("/login");
     },
   },
   computed: {
     ...mapGetters({
       username: "username",
-      isLoggedIn: "isLoggedIn"
+      isLoggedIn: "isLoggedIn",
     }),
   },
 };

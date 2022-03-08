@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const orderSchema = mongoose.Schema({
     items: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Cart'
+      ref: 'Cart',
+      ref: 'Product'
     }],
     totalPrice: {
       type: Number

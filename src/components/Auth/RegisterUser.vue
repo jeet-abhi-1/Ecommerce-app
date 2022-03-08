@@ -19,6 +19,11 @@
     >
     <span
       class="text-red text-caption text-weight-medium"
+      v-if="!$v.name.minLength"
+      >Name must be atleast {{ $v.name.$params.minLength.min }} characters</span
+    >
+    <span
+      class="text-red text-caption text-weight-medium"
       v-if="!$v.name.alpha && $v.name.$dirty"
       >Aplhabet characters only.</span
     >
@@ -77,6 +82,7 @@
 
 <script>
 import axios from "axios";
+import swal from "sweetalert";
 import {
   required,
   minLength,
@@ -128,6 +134,10 @@ export default {
             userData
           );
           console.log(response);
+          swal({
+            text: 'User registered successfully!',
+            icon: 'success'
+          })
           this.$router.push("/login");
         } catch (error) {
           this.error = error;

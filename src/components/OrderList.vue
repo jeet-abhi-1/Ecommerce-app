@@ -10,7 +10,7 @@
         </q-item-section>
       </q-item>
       <q-list bordered separator>
-        <q-item v-for="item in cartItems" :key="item._id" clickable v-ripple>
+        <q-item v-for="(item, index) in cartItems" :key="index" clickable v-ripple>
           <q-item-section class="q-pr-xl">
             <q-item-label>{{ item.title }}</q-item-label>
             <q-item-label caption>{{ item.price }}</q-item-label>
