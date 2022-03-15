@@ -18,7 +18,7 @@
         </q-item>
         <q-item>
           <q-item-section class="q-pr-xl">
-            <q-item-label>Total Price : {{ totalPrice }}</q-item-label>
+            <q-item-label class="tp">Total Price : {{ totalPrice }}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -29,6 +29,7 @@
 <script>
 
 export default {
+  name: 'OrderList',
   props: ['cartItems','totalPrice'],
   components: {},
   data() {
